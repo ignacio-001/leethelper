@@ -4,23 +4,8 @@ import { useState } from "react";
 import { Button } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import DeleteQuestion from "./DeleteQuestion";
-const renderupdateButton = (params) => {
-  return (
-    <strong>
-      <Button
-        variant="contained"
-        color="primary"
-        size="small"
-        style={{ marginLeft: 16 }}
-        onClick={() => {
-          // console.log(params.row);
-        }}
-      >
-        UPDATE
-      </Button>
-    </strong>
-  );
-};
+import UpdateQuestion from "./UpdateQuestion";
+
 const columns: DataGrid[] = [
   { field: "name", headerName: "Question", width: 170 },
   { field: "topic", headerName: "Topic name", width: 130 },
@@ -60,7 +45,7 @@ const columns: DataGrid[] = [
     field: "update",
     headerName: " Update",
     width: 150,
-    renderCell: renderupdateButton,
+    renderCell: UpdateQuestion,
     disableClickEventBubbling: false,
   },
 ];
