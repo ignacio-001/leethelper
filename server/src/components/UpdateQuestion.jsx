@@ -1,6 +1,8 @@
 import React from 'react'
 import { Button } from '@mui/material';
-const UpdateQuestion = (params) => {
+import UpdatePage from './UpdatePage';
+import axios from 'axios';
+const UpdateQuestion = ({setFormValues,params,setupdate}) => {
     return (
       <strong>
         <Button
@@ -9,7 +11,9 @@ const UpdateQuestion = (params) => {
           size="small"
           style={{ marginLeft: 16 }}
           onClick={() => {
-            // console.log(params.row);
+            setFormValues(params.row);
+            console.log("hello");
+            setupdate(false);
           }}
         >
           UPDATE

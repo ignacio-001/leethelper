@@ -1,12 +1,10 @@
 import React from 'react'
-import AddQuestion from './components/AddQuestion'
-import Container from '@mui/material/Container'
-import ShowQuestions from './components/ShowQuestions'
+import Homepage from './components/Homepage'
+
 const App = () => {
   return (
     <>
-    <AddQuestion/>
-    <ShowQuestions/>
+    <Homepage/>
     </>
   )
 }

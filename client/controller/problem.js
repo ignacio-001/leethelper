@@ -18,6 +18,20 @@ const createTask = (async (req, res) => {
     }
     res.status(200).json({ task })
   })
+  const updateTask = (async (req, res,next) => {
+    const  { id: taskID }  = req.params
+    console.log(req);
+    const task = await Problem.findOneAndUpdate({ _id: taskID }, req.body, {
+      new: true,
+      runValidators: true,
+    })
+    if (!task) {
+      return next(console.log(`No task with id : ${taskID}`, 404))
+    }
+    console.log(task);
+    res.status(200).json({task});
+    // res.status(200).json({ task })
+  })
 module.exports={
-showproblems,createTask,deleteTask
+showproblems,createTask,deleteTask,updateTask
 }

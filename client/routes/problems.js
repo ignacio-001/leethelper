@@ -1,6 +1,8 @@
 const express = require("express");
-const { showproblems, createTask, deleteTask } = require("../controller/problem");
+// const { default: UpdataPage } = require("../../server/src/components/UpdataPage");
+const { showproblems, createTask, deleteTask, updateTask } = require("../controller/problem");
 const router = express.Router();
+
 router.get("/", (req, res) => {
     res.setHeader("Access-Control-Allow-Origin", "*")
     res.setHeader("Access-Control-Allow-Credentials", "true");
@@ -10,5 +12,5 @@ router.get("/", (req, res) => {
      });
 router.route("/send").post( createTask );
 router.route("/allproblems").get( showproblems );
-router.route("/:id").delete(deleteTask);
+router.route("/:id").delete(deleteTask).patch(updateTask);
 module.exports = router;

@@ -1,15 +1,13 @@
-import React from "react";
+import React from 'react'
 import TextField from "@mui/material/TextField";
 import { Button, Checkbox, Grid, FormControlLabel } from "@mui/material";
 import Axios from "axios";
 // import Grid from "@material-ui/core/Grid";
 import grid from "@mui/material";
 import { useState } from "react";
-import { useEffect } from "react";
-
-const AddQuestion = ({handleSubmit,formValues,setFormValues}) => {
+const UpdatePage = ({handleUpdate,formValues,setFormValues}) => {
   
-  // const [checked, setchecked] = useState(true);
+  const [checked, setchecked] = useState(true);
   const handleInputChange = (e) => {
     var { name } = e.target;
     let checked=e.target.checked;
@@ -30,7 +28,7 @@ const AddQuestion = ({handleSubmit,formValues,setFormValues}) => {
   return (
     <>
       <h1>Add Question</h1>
-      <form onSubmit={handleSubmit}>
+      <form >
         {/* <Grid container alignItems="center" justify="center" direction="column"> */}
         <Grid item>
           <TextField
@@ -98,12 +96,12 @@ const AddQuestion = ({handleSubmit,formValues,setFormValues}) => {
             label="important"
           />
         </Grid>
-        <Button variant="contained" color="success" type="submit">
-          Submit
+        <Button variant="contained" color="success" type="button" onClick={handleUpdate}>
+          Update
         </Button>
       </form>
     </>
   );
 };
 
-export {AddQuestion}
+export default UpdatePage
