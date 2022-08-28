@@ -1,26 +1,43 @@
-import React, { useEffect } from "react";
-import Axios from "axios";
-import { useState } from "react";
-import { Button } from "@mui/material";
+import React from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import DeleteQuestion from "./DeleteQuestion";
 import UpdateQuestion from "./UpdateQuestion";
-
-const ShowQuestions = ({
-  handleDelete,
-  problems,
-  setFormValues,
-  setupdate,
-}) => {
+import { useContext } from "react";
+import { Allpar } from "../App";
+import { Box } from "@mui/material";
+import clsx from "clsx";
+import {Link} from "@mui/material";
+const ShowQuestions = ({ handleDelete }) => {
   // const [che, setche] = useState(check)
+  const send = useContext(Allpar);
   const columns: DataGrid[] = [
-    { field: "name", headerName: "Question", width: 170 },
+    {
+      field: "name",
+      headerClassName: "super-app-theme--header",
+      headerName: "Question",
+      width: 170,
+    },
     { field: "topic", headerName: "Topic name", width: 130 },
-    { field: "url", headerName: "URL", width: 170 },
+    {
+      field: "url",
+      renderCell: (cellValues) => {
+        return <Link href={`#${cellValues.row.url}`}>Link</Link>;
+      },
+    },
     {
       field: "solved",
       headerName: "Solved",
-      type: "Boolean",
+      type: 'boolean',
+      cellClassName: (params) => {
+        if (params.value == null) {
+          return "";
+        }
+
+        return clsx("super-app", {
+          negative: params.value === true,
+          positive: params.value === false,
+        });
+      },
       width: 90,
     },
     {
@@ -58,8 +75,8 @@ const ShowQuestions = ({
         return (
           <UpdateQuestion
             params={param}
-            setFormValues={setFormValues}
-            setupdate={setupdate}
+            setFormValues={send.setFormValues}
+            setupdate={send.setupdate}
           />
         );
       },
@@ -68,15 +85,39 @@ const ShowQuestions = ({
   ];
   return (
     <>
-      <div style={{ height: 400, width: "100%" }}>
+      <Box
+        sx={{
+          marginTop: 50,
+          height: 600,
+          width: "100%",
+          "& .super-app-theme--header": {
+            backgroundColor: "rgba(255, 7, 0, 0.55)",
+          },
+          "& .super-app-theme--cell": {
+            backgroundColor: "rgba(224, 183, 60, 0.55)",
+            color: "#1a3e72",
+            fontWeight: "600",
+          },
+          "& .super-app.negative": {
+            backgroundColor: "rgba(157, 255, 118, 0.49)",
+            color: "#1a3e72",
+            fontWeight: "600",
+          },
+          "& .super-app.positive": {
+            backgroundColor: "#d47483",
+            color: "#1a3e72",
+            fontWeight: "600",
+          },
+        }}
+      >
         <DataGrid
-          rows={problems}
+          rows={send.problems}
           getRowId={(row) => row._id}
           columns={columns}
           pageSize={20}
           rowsPerPageOptions={[20]}
         />
-      </div>
+      </Box>
     </>
   );
 };

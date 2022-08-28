@@ -1,6 +1,6 @@
 const express = require("express");
 // const { default: UpdataPage } = require("../../server/src/components/UpdataPage");
-const { showproblems, createTask, deleteTask, updateTask } = require("../controller/problem");
+const { showproblems, createTask, deleteTask, updateTask,impproblems, solved } = require("../controller/problem");
 const router = express.Router();
 
 router.get("/", (req, res) => {
@@ -13,4 +13,8 @@ router.get("/", (req, res) => {
 router.route("/send").post( createTask );
 router.route("/allproblems").get( showproblems );
 router.route("/:id").delete(deleteTask).patch(updateTask);
+router.route("/important").get(impproblems);
+router.route("/solved").get(solved);
+router.route("/solved").get(solved);
+router.route("/users").get(solved);
 module.exports = router;

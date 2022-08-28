@@ -6,18 +6,27 @@ import Axios from "axios";
 import grid from "@mui/material";
 import { useState } from "react";
 import { useEffect } from "react";
-
-const AddQuestion = ({handleSubmit,formValues,setFormValues}) => {
-  
+import allproblem from "./QuestionType/allproblems.json"
+// const cors = require("cors");
+// Axios.use(cors());
+const getallquestions =async () => {
+  console.log(allproblem.allproblem);
+};
+const AddQuestion = ({ handleSubmit, formValues, setFormValues }) => {
+  const [allprob, setallprob] = useState();
   // const [checked, setchecked] = useState(true);
   const handleInputChange = (e) => {
     var { name } = e.target;
-    let checked=e.target.checked;
-    if(name==='firattempted'||name==='solved'||name==='important'||name==='secattempt'){
-       console.log(checked);
-    }
-    else{
-      checked=e.target.value;
+    let checked = e.target.checked;
+    if (
+      name === "firattempted" ||
+      name === "solved" ||
+      name === "important" ||
+      name === "secattempt"
+    ) {
+      console.log(checked);
+    } else {
+      checked = e.target.value;
     }
     // console.log(name,checked);
     setFormValues({
@@ -26,7 +35,9 @@ const AddQuestion = ({handleSubmit,formValues,setFormValues}) => {
     });
   };
 
-
+  useEffect(() => {
+    getallquestions();
+  }, []);
   return (
     <>
       <h1>Add Question</h1>
@@ -77,21 +88,21 @@ const AddQuestion = ({handleSubmit,formValues,setFormValues}) => {
             label="firattempted"
           />
           <FormControlLabel
-            control={<Checkbox  />}
+            control={<Checkbox />}
             name="solved"
             value={formValues.solved}
             onChange={handleInputChange}
             label="solved"
           />
           <FormControlLabel
-           control={<Checkbox  />}
+            control={<Checkbox />}
             name="secattempt"
             value={formValues.secattempt}
             onChange={handleInputChange}
             label="secattempt"
           />
           <FormControlLabel
-             control={<Checkbox  />}
+            control={<Checkbox />}
             name="important"
             value={formValues.important}
             onChange={handleInputChange}
@@ -106,4 +117,4 @@ const AddQuestion = ({handleSubmit,formValues,setFormValues}) => {
   );
 };
 
-export {AddQuestion}
+export { AddQuestion };

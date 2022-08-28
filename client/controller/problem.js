@@ -1,10 +1,21 @@
 const Problem = require("../models/problems")
-// const asyncWrapper = require('../middleware/async')
 const showproblems=(async(req,res)=>{
     const problems=await Problem.find({});
     res.status(200).json({problems});
     // return res.send(problems);
 })
+const impproblems=(async(req,res)=>{
+  const problems=await Problem.find({important: true});
+  res.status(200).json({problems});
+  // return res.send(problems);
+})
+const solved=(async(req,res)=>{
+  const problems=await Problem.find({solved: true});
+  res.status(200).json({problems});
+  console.log(problems);
+  // return res.send(problems);
+})
+
 const createTask = (async (req, res) => {
     const task = await Problem.create(req.body)
     console.log(req);
@@ -33,5 +44,5 @@ const createTask = (async (req, res) => {
     // res.status(200).json({ task })
   })
 module.exports={
-showproblems,createTask,deleteTask,updateTask
+showproblems,createTask,deleteTask,updateTask,impproblems,solved
 }
